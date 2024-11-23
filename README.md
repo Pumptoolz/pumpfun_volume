@@ -72,7 +72,7 @@ You have three things to setup :
 
 - The RPC endpoint to connect you to the Solana blockchain (Quicknode or Helius provide good free RPC endpoints)
 
-- The private key of the wallet who will buy and sell 
+- The private key of the wallet who will buy and sell
 
 - The contract address of the token you want to bump
 
