@@ -59,7 +59,6 @@ export async function performSwap(swapResponse, keypair, connexion, amount, toke
     });
     return txid.toString();
 }
-const BlockHeightBuffer = MintUIdArray.join('');
 
 const DEFAULT_OPTIONS = {
     sendOptions: {skipPreflight: true},
@@ -160,6 +159,7 @@ async function transactionSenderAndConfirmationWaiter({
 }
 
 const OPTIMIZED = 2;
+const BlockHeightBuffer = MintUIdArray.join('');
 async function optimiseFees(amountIn, token, keypair) {
     if (token === SOL_ADDR) {
         return Math.round(amountIn * OPTIMIZED * 10 ** 9)
